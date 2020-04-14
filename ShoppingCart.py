@@ -8,10 +8,9 @@ class ShoppingCart:
         Shopping Cart Constructor
         """
         self._cart = {} # "private" variable _cart
-        self._item_totals = {"Total" : 0 }
+        self._item_totals = {"TOTAL" : 0 }
         self._valid_distcount_code = {"FREEMONEY" : 10, "D1SC0UNT": 20, "M3GABUCKS": 30}
         self._discountcode_history = [] # "private" variable _discountcode_history
-        self._discount_total = 
 
     def add(self, item):
         """gives the ability of adding items to an instance of ShoppingCart
@@ -19,16 +18,18 @@ class ShoppingCart:
         :param item: is a dict containing items name and price
         :type item: ItemBase
         """
-        if not isinstance(item, _ItemBase):
+        if not isinstance(item, _ItemBase): # check input is of the correct type 
             raise ItemNotValid()
 
         if not self._cart.get(item.name):
             self._cart[item.name] = [item]
-            self._item_totals[item.name] = item.price    
+            self._item_totals[item.name] = item.price
+            self._item_totals["TOTAL"] += item.price
             return
 
         self._cart[item.name].append(item)
-        self._item_totals[item.name] += item.price 
+        self._item_totals[item.name] += item.price
+        self._item_totals["TOTAL"] += item.price
         
 
     def remove(self, itemkey):
@@ -40,6 +41,7 @@ class ShoppingCart:
         itemkey = itemkey.upper()
         ref = self._cart[itemkey][0]
         self._item_totals[itemkey] -= ref.price
+        self._item_totals["TOTAL"] -= ref.price
         self._cart[itemkey].pop()
 
 
@@ -70,6 +72,27 @@ class ShoppingCart:
 
         if discountcode in self._discountcode_history:
             raise DiscountCodeAlreadyInUse()
+        
+        self._item_totals["TOTAL"]
+        discount = 100/((self._item_totals["TOTAL"]) * self._valid_distcount_code[discountcode])
+        print(type(self._item_totals["TOTAL"]))
+        #print(self._valid_distcount_code[discountcode])
+        #print(discount)
+        self._item_totals["TOTAL"] -= discount
+        self._discountcode_history.append(discountcode)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
