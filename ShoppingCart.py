@@ -9,7 +9,7 @@ class ShoppingCart:
         """
         self._cart = {} # "private" variable _cart
         self._item_totals = {"TOTAL" : 0 }
-        self._valid_distcount_code = {"FREEMONEY" : 10, "D1SC0UNT": 20, "M3GABUCKS": 30}
+        self._valid_distcount_code = {"FREEMONEY" : 0.1, "D1SC0UNT": 0.2, "M3GABUCKS": 0.3}
         self._discountcode_history = [] # "private" variable _discountcode_history
 
     def add(self, item):
@@ -57,6 +57,7 @@ class ShoppingCart:
     def totals(self):
         """Prints agragated totals
         """
+        print("\n")
         for key, value in self._item_totals.items():
             print("{}\t£{}".format(key.title(), value))
 
@@ -73,12 +74,8 @@ class ShoppingCart:
         if discountcode in self._discountcode_history:
             raise DiscountCodeAlreadyInUse()
         
-        self._item_totals["TOTAL"]
-        discount = 100/((self._item_totals["TOTAL"]) * self._valid_distcount_code[discountcode])
-        print(type(self._item_totals["TOTAL"]))
-        #print(self._valid_distcount_code[discountcode])
-        #print(discount)
-        self._item_totals["TOTAL"] -= discount
+        discount = self._item_totals["TOTAL"] * self._valid_distcount_code[discountcode]
+        self._item_totals["TOTAL"] = self._item_totals["TOTAL"] - discount
         self._discountcode_history.append(discountcode)
 
 
