@@ -28,6 +28,6 @@ pip install -r requierments.txt
 ### Running the test 
 
 ```
-pytest test.py 
+pytest test.py -s 
 ```
 
