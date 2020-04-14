@@ -59,7 +59,10 @@ class ShoppingCart:
         """
         print("\n")
         for key, value in self._item_totals.items():
-            print("{}\t£{}".format(key.title(), value))
+            if key != "TOTAL":
+                print("{}\t{}\t£{}".format(key.title(), len(self._cart[key]) ,value))
+            else:
+                print("{}\t£{}\n".format(key.title(),value))
 
 
     def apply_discount_code(self, discountcode):
